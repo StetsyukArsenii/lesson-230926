@@ -37,14 +37,24 @@ header h1 {
     gap: 22px;
 }
 
-.wrapper::before {
-    content: "";
-    display: block;
+.ad-card {
     min-height: 240px;
     border-radius: 24px;
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.8), rgba(191, 219, 254, 0.5));
     box-shadow: 0 18px 40px rgba(30, 41, 59, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.8);
+    padding: 24px;
+}
+
+.ad-card h2 {
+    margin-bottom: 14px;
+    color: #0f172a;
+    font-size: 1.35rem;
+}
+
+.ad-card p {
+    color: #475569;
+    line-height: 1.6;
 }
 
 .modal {
