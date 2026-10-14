@@ -1,24 +1,22 @@
-const express = reqire("express");
-
-const app = express();
-
-app.get("/", (req, res) => {
-  res.send("Hello, World!");
+document.querySelector("#add").addEventListener("click", () => {
+    document.querySelector(".modal").style.display = "flex";
+});
+document.querySelector(".close").addEventListener("click", () => {
+    document.querySelector(".modal").style.display = "none";
 });
 
-app.use((req, res,next) => {
-    console.log(`${req.method} ${req.url}`);
-    next();
-});
-app.use(express.static("public"));
-
-
-app.get("/api/users", (req,res) => {
-  res.json([{ name: "John Doe" }, { name: "Jane Doe" }]);
-
-});
-
-app.use((err,req,res,next) => {
-  console.log(err.stack);
-  re.status(500).send("Something broke!");
+document.querySelector("#add-ad-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    fetch('/add', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            title: e.target.title.value,
+            description: e.target.description.value
+        })
+    }).then(() => {
+        location.reload();
+    })
 })
