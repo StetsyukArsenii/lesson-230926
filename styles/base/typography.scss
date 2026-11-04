@@ -1,0 +1,11 @@
+@font-face {
+  font-family: "Retro Floral";
+  src: url("assets/Retro%20Floral.ttf") format("truetype"),
+       url("assets/Retro%20Floral.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+$font: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+$title-font: "Retro Floral", "Segoe UI", sans-serif;

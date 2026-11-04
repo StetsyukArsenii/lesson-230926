@@ -6,15 +6,18 @@
         <%- include('header.ejs') -%>
             <main>
                 <div class="wrapper">
-                    <% products.forEach((product)=> { -%>
-                        <div class="ad">
+                    <% products.forEach((product, index)=> { -%>
+                        <a href="/post/<%= index %>" class="ad <%= product.image && product.image.length ? '' : 'ad--text-only' %>">
                             <h3>
                                 <%= product.title %>
                             </h3>
+                            <% if (product.image && product.image.length) { -%>
+                                <img class="ad-image" src="/uploads/<%= product.image[0] %>" alt="<%= product.title %>">
+                            <% } -%>
                             <p>
                                 <%= product.description %>
                             </p>
-                        </div>
+                        </a>
                         <% }); -%>
                 </div>
                 <%- include('modal.ejs') -%>

@@ -1,13 +1,18 @@
 <div class="modal">
     <div class="modal-content">
-        <for id="add-ad-form">
-            <button class="close">X</button>
+        <form id="add-ad-form" enctype="multipart/form-data">
+            <button class="close" type="button">X</button>
             <h2>Add New Ad</h2>
             <label for="title">Title:</label>
             <input type="text" id="title" name="title" required>
             <label for="description">Description:</label>
             <textarea id="description" name="description" required></textarea>
+            <label for="image" class="image-label">Image:</label>
+            <input type="file" id="image" name="image" multiple required accept="image/*">
+            <div class="image-preview" aria-live="polite" hidden></div>
+            <p class="form-error" role="alert" hidden></p>
+            <button type="button" class="clear-button">Clear form</button>
             <button type="submit" class="add-button">Add Ad</button>
-        </for>
+        </form>
     </div>
 </div>
