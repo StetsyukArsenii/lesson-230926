@@ -2,6 +2,7 @@ const express = require('express');
 const fs = require('node:fs/promises');
 const path = require('node:path');
 const multer = require('multer');
+const { addAbortListener } = require('node:events');
 
 const app = express();
 const adsPath = path.join(__dirname, 'ads.json');
@@ -108,3 +109,4 @@ start().catch((error) => {
     console.error('Could not start server:', error);
     process.exitCode = 1;
 });
+addAbo
