@@ -63,14 +63,6 @@ if (closeButton && modal) {
     });
 }
 
-if (modal) {
-    modal.addEventListener('click', (event) => {
-        if (event.target === modal) {
-            modal.classList.remove('active');
-        }
-    });
-}
-
 if (form && modal) {
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
