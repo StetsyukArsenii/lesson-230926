@@ -23,6 +23,10 @@ const storage = multer.diskStorage({
 });
 const upload = multer({
     storage,
+    limits: {
+        files: 10,
+        fileSize: 5 * 1024 * 1024
+    },
     fileFilter: (req, file, callback) => {
         if (!file.mimetype.startsWith('image/')) {
             return callback(new Error('Only image files are allowed'));
@@ -90,6 +94,21 @@ app.post('/add', upload.array('image'), async (req, res) => {
         console.error('Could not save product:', error);
         res.status(500).json({ error: 'Could not save product' });
     }
+});
+
+app.use((error, req, res, next) => {
+    if (error instanceof multer.MulterError) {
+        const message = error.code === 'LIMIT_FILE_SIZE'
+            ? 'Each image must be 5 MB or smaller'
+            : 'Could not process the uploaded images';
+        return res.status(400).json({ error: message });
+    }
+
+    if (error.message === 'Only image files are allowed') {
+        return res.status(400).json({ error: error.message });
+    }
+
+    next(error);
 });
 
 app.use((req, res) => {

@@ -1,4 +1,5 @@
 <header>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark theme" title="Switch to dark theme">🌙</button>
     <h1>Advertises</h1>
     <h5>
         <% if (new Date().getHours() < 12) { -%>
@@ -6,7 +7,7 @@
         <% } else if (new Date().getHours() < 18) { -%>
             Good afternoon!
         <% } else { -%>
-            Good evening!g
+            Good evening!
         <% } %>
     </h5>
 </header>

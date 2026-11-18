@@ -1,4 +1,4 @@
-@use "base/color" as *;
+@use "../base/color" as *;
 
 .post {
   width: min(100% - 48px, 1200px);
@@ -7,7 +7,7 @@
 
   h1 {
     margin: 0 0 16px;
-    color: $text;
+    color: var(--text);
     font-size: clamp(1.8rem, 5vw, 2.6rem);
     line-height: 1.2;
     overflow-wrap: anywhere;
@@ -15,7 +15,7 @@
 
   > p {
     margin: 0;
-    color: $muted;
+    color: var(--muted);
     line-height: 1.75;
     white-space: pre-wrap;
     overflow-wrap: anywhere;
@@ -32,7 +32,7 @@
     width: 100%;
     max-height: 520px;
     object-fit: contain;
-    background: rgba(255, 255, 255, 0.55);
+    background: var(--card-start);
     border-radius: 16px;
   }
 }

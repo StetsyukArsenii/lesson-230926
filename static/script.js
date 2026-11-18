@@ -5,8 +5,41 @@ const form = document.getElementById('add-ad-form');
 const imageInput = document.getElementById('image');
 const imagePreview = document.querySelector('.image-preview');
 const clearButton = document.querySelector('.clear-button');
+const themeToggle = document.getElementById('theme-toggle');
 const errorMessage = form?.querySelector('.form-error');
 let previewUrls = [];
+
+function setTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+
+    if (themeToggle) {
+        const nextTheme = theme === 'dark' ? 'light' : 'dark';
+        themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+        themeToggle.setAttribute('aria-label', `Switch to ${nextTheme} theme`);
+        themeToggle.title = `Switch to ${nextTheme} theme`;
+    }
+}
+
+let savedTheme = 'light';
+try {
+    savedTheme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+} catch (error) {
+    console.warn('Could not read the saved theme preference:', error);
+}
+setTheme(savedTheme);
+
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        setTheme(nextTheme);
+
+        try {
+            localStorage.setItem('theme', nextTheme);
+        } catch (error) {
+            console.warn('Could not save the theme preference:', error);
+        }
+    });
+}
 
 function clearImagePreview() {
     previewUrls.forEach((url) => URL.revokeObjectURL(url));
@@ -53,6 +86,8 @@ if (imageInput && imagePreview) {
 if (addButton && modal) {
     addButton.addEventListener('click', () => {
         modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+        modal.querySelector('input')?.focus();
     });
 }
 
@@ -60,8 +95,26 @@ if (closeButton && modal) {
     closeButton.addEventListener('click', (event) => {
         event.preventDefault();
         modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+        addButton.focus();
     });
 }
+
+modal?.addEventListener('click', (event) => {
+    if (event.target === modal) {
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+        addButton?.focus();
+    }
+});
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && modal?.classList.contains('active')) {
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+        addButton?.focus();
+    }
+});
 
 if (form && modal) {
     form.addEventListener('submit', async (event) => {
